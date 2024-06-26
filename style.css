@@ -116,9 +116,10 @@ body {
 }
 
 .special-enemigo.damage {
+    color: red;
     filter: brightness(2.0);
-    filter: drop-shadow(0 0 10px rgb(rgb(243, 14, 14)));
-    box-shadow: 0 0 25px #ff0404;
+    filter: drop-shadow(
+    5px 5px 5px  red) ;
     /* background-color: #ff0404; */
 }
 
