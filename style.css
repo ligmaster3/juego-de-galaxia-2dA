@@ -1,0 +1,277 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.caja {
+    position: relative;
+    margin: auto;
+    width: 100%;
+    height: 100vh;
+    max-width: 1600px;
+    background-color: #333;
+    background-image: url('space-from.jpg');
+    /* imagen de fondo */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.tiempoContet {
+    position: absolute;
+    right: 46%;
+    top: 0;
+    font-size: 27px;
+    color: #ff091a;
+    z-index: 10;
+}
+
+.puntuacionContent {
+    position: absolute;
+    display: flex;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: white;
+    z-index: 10;
+}
+
+.restart {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    font-size: 16px;
+    background: lightgrey;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+.pausa {
+    position: absolute;
+    top: 50px;
+    right: 80px;
+    font-size: 16px;
+    background: lightgrey;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+.nave {
+    position: absolute;
+    width: 82px;
+    height: 100px;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/016/778/825/original/spaceship-alien-galaxy-fleet-free-png.png');
+    background-size: 120% 140%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    bottom: 100px;
+    left: 50%;
+    top: calc(80% - 50px);
+    transform: translateX(-50%);
+}
+
+.enemigo,
+.enemigos {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-image: url('sprite-spacecraft-two-dimensional-space-spaceshipone-opengameart-org-spaceship-36bb1b6391a76b1b605a4ac54280f6b3.png');
+    background-size: 96% 96%;
+    background-position: center;
+    overflow: hidden;
+    transform: rotate(-180deg);
+    animation: rotateEnemy 4s linear infinite;
+}
+.enemy-bullet {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    color: green;
+    border-radius: 5px;
+}
+
+.special-enemigo {
+    z-index: 1;
+    left: 100px;
+    background-image: url('spaceshipone-spaceshiptwo-sprite-spacecraft-two-dimensional-space-spaceship-af3c87e6ade692b2ff8a455c57be89bc.png');
+    background-position: center;
+    background-size: cover;
+    width: 180px;
+    height: 280px;
+    background-color: transparent;
+    position: absolute;
+    animation: rotateEnemy 4s linear infinite;
+}
+
+.special-enemigo.damage {
+    filter: brightness(2.0);
+    filter: drop-shadow(0 0 10px rgb(rgb(243, 14, 14)));
+    box-shadow: 0 0 25px #ff0404;
+    /* background-color: #ff0404; */
+}
+
+.control {
+    display: none;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    /* display: flex; */
+    justify-content: space-around;
+}
+
+
+
+.bullet {
+    position: absolute;
+    width: 5px;
+    height: 10px;
+    background-color: yellow;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 40px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
+
+@keyframes rotateEnemy {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(40deg);
+    }
+
+    100% {
+        transform: rotate(-20deg);
+    }
+}
+
+@keyframes explosion {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.explosion {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: url('https://static.vecteezy.com/system/resources/thumbnails/028/574/108/small_2x/explosion-fire-ai-generated-png.png') no-repeat center center;
+    background-size: cover;
+    transform: scale(1);
+    opacity: 1;
+    animation: explosion 0.5s forwards;
+}
+
+
+
+@media (max-width: 768px) {
+    .caja {
+        position: relative;
+        border-left: 2px solid black;
+        /* Ajusta el borde izquierdo si es necesario */
+        border-top: 2px solid black;
+        /* Ajusta el borde superior si es necesario */
+        border-bottom: 52px solid black;
+        /* Ajusta el borde inferior si es necesario */
+        overflow: hidden;
+    }
+    .tiempoContet {
+        top: 10px;
+        left: 0;
+        text-align: left;
+    }
+    .nave {
+        background-size: 112% 120%;
+        top: calc(80% - 50px);
+        left: 50%;
+        width: 60px;
+        height: 80px;
+    }
+
+    .enemigo,
+    .enemigos {
+        position: absolute;
+        width: 84px;
+        height: 90px;
+        background-size: 94% 90%;
+        background-position: center; 
+        background-repeat: no-repeat;
+    }
+    .enemy-bullet {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: green;
+        color: green;
+        border-radius: 5px;
+    }
+
+    .control {
+        display: flex;
+        position: fixed;
+        bottom: 20px;
+        width: 100%;
+        justify-content: space-around;
+        z-index: 1000;
+    }
+
+    .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 15vw;
+        height: 15vw;
+        border: none;
+        background-color: #333;
+        color: #fff;
+        cursor: pointer;
+        margin: 5px;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .btn:hover {
+        background-color: #555;
+    }
+
+    .btn:active {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+}
