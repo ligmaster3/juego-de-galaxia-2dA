@@ -9,12 +9,12 @@ let restartBtn = document.querySelector('.restart'); // Selección del botón co
 let juegoEnMarcha = true; // Variable que indica si el juego está en marcha
 let enemigos = []; // Array que almacenará los enemigos del juego
 let tiempo = 0; // Tiempo transcurrido inicialmente
-let speed = 1.5; // Velocidad de movimiento inicial
+let speed = 1.8; // Velocidad de movimiento inicial
 let score = 0; // Puntuación inicial del juego
-let gameTime = 10; // Duración máxima del juego en segundos
+let gameTime = 20; // Duración máxima del juego en segundos
 let gameInterval; // Intervalo del juego para controlar el tiempo y eventos
 let specialEnemy; // Enemigo especial del juego
-let specialEnemyLive = 22; // Vida del enemigo especial
+let specialEnemyLive = 42; // Vida del enemigo especial
 let specialEnemySpeed = 2; // Velocidad del enemigo especial
 let specialEnemyDirection = 1; // Dirección del movimiento del enemigo especial (1 o -1)
 const initialSpecialEnemyLive = 10; // Vida inicial del enemigo especial
@@ -107,6 +107,7 @@ document.addEventListener('keydown', (e) => {
                 createExplosion(parseInt(specialEnemy.style.left), parseInt(specialEnemy.style.top)); // Crea una explosión en la posición del enemigo especial
                 specialEnemyLive--; // Reduce la vida del enemigo especial
                 specialEnemy.classList.add('damage'); // Agrega una clase para indicar daño al enemigo especial
+                setTimeout(() => specialEnemy.classList.remove('damage'), 200); // Quita la clase de daño después de un breve tiempo
                 if (specialEnemy && specialEnemy.explosion) {
                     setTimeout(() => {
                         specialEnemy.explosion.remove();
@@ -118,8 +119,10 @@ document.addEventListener('keydown', (e) => {
                     createExplosion(parseInt(specialEnemy.style.left), parseInt(specialEnemy.style.top)); // Crea una explosión en la posición del enemigo especial
                     specialEnemy.remove(); // Elimina al enemigo especial del DOM
                     specialEnemy = null; // Reinicia la referencia al enemigo especial
-                    displayMessage('HAS GANADO'); // Muestra un mensaje de victoria
+                    displayMessage('HAS GANADO');alert('juego finalizado') // Muestra un mensaje de victoria
                     restartGame(); // Reinicia el juego
+                    clearInterval(gameInterval); // Limpia el intervalo game
+
                 }
     
                 bullet.remove(); // Elimina la bala del DOM
@@ -217,10 +220,11 @@ document.addEventListener('keydown', (e) => {
         juegoEnMarcha = !juegoEnMarcha; // Cambia el estado del juego (en marcha o pausado)
 
         if (juegoEnMarcha) { // Si el juego está en marcha
-            startTimer(); // Inicia el temporizador del juego
+
             enemigos.forEach(enemy => {
                 enemy.style.animationPlayState = 'running'; // Reanuda la animación del enemigo
-                
+                animate();
+                startTimer();
             });
             if (specialEnemy) {
                 specialEnemy.style.animationPlayState = 'running'; // Reanuda la animación del enemigo especial
@@ -244,6 +248,7 @@ document.addEventListener('keydown', (e) => {
     }
     function restartGame() {
         score = 0; // Reinicia la puntuación a cero
+        speed = 1.5;
         scoreElement.textContent = score; // Actualiza el elemento HTML de la puntuación
         enemigos.forEach(enemy => enemy.remove()); // Elimina todos los enemigos del DOM
         enemigos = []; // Reinicia el array de enemigos
